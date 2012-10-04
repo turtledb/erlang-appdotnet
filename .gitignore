@@ -1,6 +1,11 @@
 .eunit
+.project
+.settings
+test.args
 deps
-priv
+ebin
+logs
 *.o
 *.beam
 *.plt
+*.dump
