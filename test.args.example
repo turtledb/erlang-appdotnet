@@ -1,0 +1,4 @@
+-config etc/dev
+-appdotnet client_id     '"..."'
+-appdotnet client_secret '"..."'
+-appdotnet access_token  '"..."'

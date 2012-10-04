@@ -1,0 +1,17 @@
+{application, appdotnet,
+ [
+  {description, "App.net Erlang Client"},
+  {vsn, "1.0.0"},
+  {modules, [
+             appdotnet_app,
+             appdotnet_sup,
+             appdotnet_client
+            ]},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { appdotnet_app, []}},
+  {env, []}
+ ]}.
