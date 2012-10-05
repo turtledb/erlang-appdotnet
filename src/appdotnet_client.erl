@@ -39,19 +39,19 @@ access_token(Pid, ClientId, ClientSecret, RedirectURI, Code) ->
     gen_server:call(Pid, {access_token, ClientId, ClientSecret, RedirectURI, Code}, ?CALL_TIMEOUT).
 
 retrieve_user(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, get, "/stream/0/users/"++UserId}, ?CALL_TIMEOUT).
+    gen_server:call(Pid, {resource, retrieve_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
 follow_user(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, post, "/stream/0/users/"++UserId++"/follow"}, ?CALL_TIMEOUT).
+    gen_server:call(Pid, {resource, follow_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
 unfollow_user(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, delete, "/stream/0/users/"++UserId++"/follow"}, ?CALL_TIMEOUT).
+    gen_server:call(Pid, {resource, unfollow_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
 following(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, get, "/stream/0/users/"++UserId++"/following"}, ?CALL_TIMEOUT).
+    gen_server:call(Pid, {resource, following, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
 followers(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, get, "/stream/0/users/"++UserId++"/followers"}, ?CALL_TIMEOUT).
+    gen_server:call(Pid, {resource, followers, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
 %% ====================================================================
 %% Behavioural functions 
@@ -94,41 +94,13 @@ init(_Args) ->
                    Reason :: term().
 %% ====================================================================
 handle_call({authenticate_url, ClientId, RedirectURI, Scope}, _From, State) ->
-    Params = [{"client_id",ClientId},
-              {"response_type","code"},
-              {"redirect_uri",RedirectURI},
-              {"scope", string:join(Scope,",")}
-             ],
-    URL = "https://alpha.app.net/oauth/authenticate?" ++ url_encode(Params),
-    {reply, {ok, URL}, State};
+    {reply, appdotnet:authenticate_url(ClientId, RedirectURI, Scope), State};
 
 handle_call({access_token, ClientId, ClientSecret, RedirectURI, Code}, _From, State) ->
-    Params = [{"client_id",ClientId},
-              {"client_secret",ClientSecret},
-              {"grant_type","authorization_code"},
-              {"redirect_uri",RedirectURI},
-              {"code", Code}
-             ],
-    case ibrowse:send_req("https://alpha.app.net/oauth/access_token", [{"Content-Type","application/x-www-form-urlencoded"}], post, url_encode(Params)) of
-        {ok, [$2|_], _Headers, Body} ->
-            Data = jsx:decode(list_to_binary(Body)),
-            BinaryAccessToken = proplists:get_value(<<"access_token">>, Data),
-            {reply, {ok, binary_to_list(BinaryAccessToken)}, State};
-        {ok, StatusCode, Headers, Body} ->
-            {reply, {error, {list_to_integer(StatusCode), Headers, Body}}, State};
-        {error, Reason} ->
-            {reply, {error, Reason}, State}
-    end;
+    {reply, appdotnet:access_token(ClientId, ClientSecret, RedirectURI, Code), State};
 
-handle_call({resource, AccessToken, Method, Path}, _From, State) ->
-    case ibrowse:send_req("https://alpha-api.app.net/"++Path, [{"Authorization","Bearer "++AccessToken}], Method, []) of
-        {ok, [$2|_], _Headers, Body} ->
-            {reply, {ok, jsx:decode(list_to_binary(Body))}, State};
-        {ok, StatusCode, Headers, Body} ->
-            {reply, {error, {list_to_integer(StatusCode), Headers, Body}}, State};
-        {error, Reason} ->
-            {reply, {error, Reason}, State}
-    end;
+handle_call({resource, Function, Args}, _From, State) ->
+    {reply, erlang:apply(appdotnet, Function, Args), State};
 
 handle_call(_Request, _From, State) ->
     {reply, ok, State}.
@@ -196,11 +168,3 @@ code_change(_OldVsn, State, _Extra) ->
 %% ====================================================================
 %% Internal functions
 %% ====================================================================
-url_encode(Params) ->
-    url_encode(Params,"").
-
-url_encode([],[_|Acc]) ->
-    Acc;
-
-url_encode([{Key,Value}|Params],Acc) ->
-    url_encode(Params, Acc ++ "&" ++ ibrowse_lib:url_encode(Key) ++ "=" ++ ibrowse_lib:url_encode(Value)).
