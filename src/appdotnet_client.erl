@@ -11,8 +11,14 @@
 %% API functions
 %% ====================================================================
 -export([start/0,start/1,stop/1,start_link/1]).
+
 -export([authenticate_url/3,authenticate_url/4,access_token/5]).
--export([retrieve_user/3,follow_user/3,unfollow_user/3,followers/3,following/3]).
+
+-export([retrieve_user/3,follow_user/3,unfollow_user/3,list_following/3,list_followers/3]).
+-export([mute_user/3,unmute_user/3,list_muted/2]).
+-export([search_for_users/3,list_reposters/3,list_stars/3]).
+
+-export([check_current_token/2]).
 
 start() ->
     start([]).
@@ -47,11 +53,33 @@ follow_user(Pid, AccessToken, UserId) ->
 unfollow_user(Pid, AccessToken, UserId) ->
     gen_server:call(Pid, {resource, unfollow_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
-following(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, following, [AccessToken,UserId]}, ?CALL_TIMEOUT).
+list_following(Pid, AccessToken, UserId) ->
+    gen_server:call(Pid, {resource, list_following, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
-followers(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, followers, [AccessToken,UserId]}, ?CALL_TIMEOUT).
+list_followers(Pid, AccessToken, UserId) ->
+    gen_server:call(Pid, {resource, list_followers, [AccessToken,UserId]}, ?CALL_TIMEOUT).
+
+mute_user(Pid, AccessToken, UserId) ->
+    gen_server:call(Pid, {resource, mute_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
+
+unmute_user(Pid, AccessToken, UserId) ->
+    gen_server:call(Pid, {resource, unmute_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
+
+list_muted(Pid, AccessToken) ->
+    gen_server:call(Pid, {resource, list_muted, [AccessToken]}, ?CALL_TIMEOUT).
+
+search_for_users(Pid, AccessToken, Query) ->
+    gen_server:call(Pid, {resource, search_for_users, [AccessToken,Query]}, ?CALL_TIMEOUT).
+
+list_reposters(Pid, AccessToken, PostId) ->
+    gen_server:call(Pid, {resource, list_reposters, [AccessToken,PostId]}, ?CALL_TIMEOUT).
+
+list_stars(Pid, AccessToken, PostId) ->
+    gen_server:call(Pid, {resource, list_stars, [AccessToken,PostId]}, ?CALL_TIMEOUT).
+
+check_current_token(Pid, AccessToken) ->
+    gen_server:call(Pid, {resource, check_current_token, [AccessToken]}, ?CALL_TIMEOUT).
+
 
 %% ====================================================================
 %% Behavioural functions 

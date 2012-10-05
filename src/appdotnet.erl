@@ -11,7 +11,12 @@
 %% Exported Functions
 %%
 -export([authenticate_url/2,authenticate_url/3,access_token/4]).
--export([retrieve_user/2,follow_user/2,unfollow_user/2,following/2,followers/2]).
+
+-export([retrieve_user/2,follow_user/2,unfollow_user/2,list_following/2,list_followers/2]).
+-export([mute_user/2,unmute_user/2,list_muted/1]).
+-export([search_for_users/2,list_reposters/2,list_stars/2]).
+
+-export([check_current_token/1]).
 
 %%
 %% API Functions
@@ -52,11 +57,32 @@ follow_user(AccessToken, UserId) ->
 unfollow_user(AccessToken, UserId) ->
     get_resource(AccessToken, delete, "/stream/0/users/"++UserId++"/follow").
 
-following(AccessToken, UserId) ->
+list_following(AccessToken, UserId) ->
     get_resource(AccessToken, get, "/stream/0/users/"++UserId++"/following").
 
-followers(AccessToken, UserId) ->
+list_followers(AccessToken, UserId) ->
     get_resource(AccessToken, get, "/stream/0/users/"++UserId++"/followers").
+
+mute_user(AccessToken, UserId) ->
+    get_resource(AccessToken, post, "/stream/0/users/"++UserId++"/mute").
+
+unmute_user(AccessToken, UserId) ->
+    get_resource(AccessToken, delete, "/stream/0/users/"++UserId++"/mute").
+
+list_muted(AccessToken) ->
+    get_resource(AccessToken, get, "/stream/0/users/me/muted").
+
+search_for_users(AccessToken, Query) ->
+    get_resource(AccessToken, get, "/stream/0/users/search?q=" ++ ibrowse_lib:url_encode(Query)).
+
+list_reposters(AccessToken, PostId) ->
+    get_resource(AccessToken, get, "/stream/0/posts/"++PostId++"/reposters").
+
+list_stars(AccessToken, PostId) ->
+    get_resource(AccessToken, get, "/stream/0/posts/"++PostId++"/stars").
+
+check_current_token(AccessToken) ->
+    get_resource(AccessToken, get, "/stream/0/token").
 
 %%
 %% Local Functions
