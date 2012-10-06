@@ -1,0 +1,11 @@
+@author Erik Hedenstršm <erik@hedenstroem.com>, @erikh on app.net
+@copyright 2012 Erik Hedenstršm
+@version 1.0.0
+
+@title erlang-appdotnet
+
+@doc
+
+Erlang library for App.net
+
+@end

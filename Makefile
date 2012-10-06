@@ -2,16 +2,16 @@ ERL          ?= erl
 APP          := appdotnet
 REBAR        := ./rebar
 
-all: compile doc
+all: compile docs
 
 compile:
 	@$(REBAR) get-deps
 	@$(REBAR) compile
 
-doc:
+docs:
 	@$(REBAR) doc
 
-test: all
+test: compile
 	@ERL_FLAGS="-args_file test.args" $(REBAR) skip_deps=true eunit
 
 clean:
@@ -19,7 +19,6 @@ clean:
 
 distclean: clean
 	@rm -f *.dump
-	@rm -rf doc
 	@rm -rf ebin
 	@rm -rf deps
 	@rm -rf logs
