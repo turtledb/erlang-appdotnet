@@ -36,9 +36,10 @@ or
 
 
 <table width="100%" border="0" summary="list of modules">
+<tr><td><a href="anonymous_tests.md" class="module">anonymous_tests</a></td></tr>
 <tr><td><a href="appdotnet.md" class="module">appdotnet</a></td></tr>
 <tr><td><a href="appdotnet_app.md" class="module">appdotnet_app</a></td></tr>
 <tr><td><a href="appdotnet_client.md" class="module">appdotnet_client</a></td></tr>
 <tr><td><a href="appdotnet_sup.md" class="module">appdotnet_sup</a></td></tr>
-<tr><td><a href="appdotnet_tests.md" class="module">appdotnet_tests</a></td></tr></table>
+<tr><td><a href="authenticated_tests.md" class="module">authenticated_tests</a></td></tr></table>
 

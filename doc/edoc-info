@@ -1,4 +1,4 @@
 {application,appdotnet}.
 {packages,[]}.
-{modules,[appdotnet,appdotnet_app,appdotnet_client,appdotnet_sup,
-          appdotnet_tests]}.
+{modules,[anonymous_tests,appdotnet,appdotnet_app,appdotnet_client,
+          appdotnet_sup,authenticated_tests]}.
