@@ -1,0 +1,4 @@
+{application,appdotnet}.
+{packages,[]}.
+{modules,[appdotnet,appdotnet_app,appdotnet_client,appdotnet_sup,
+          appdotnet_tests]}.
