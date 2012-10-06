@@ -6,6 +6,24 @@
 
 @doc
 
-Erlang library for App.net
+<p>[![Build Status](https://secure.travis-ci.org/ehedenst/erlang-appdotnet.png)](http://travis-ci.org/ehedenst/erlang-appdotnet)</p>
+
+== Quick Start ==
+
+<p><pre><![CDATA[
+    application:start(crypto),
+    application:start(public_key),
+    application:start(ssl),
+    application:start(ibrowse),
+    {ok, Data} = appdotnet:retrieve_user("[ACCESS TOKEN]", "@erikh").
+]]></pre></p>
+
+or
+
+<p><pre><![CDATA[
+    application:start(appdotnet),
+    {ok, Pid} = appdotnet_client:start(),
+    {ok, Data} = appdotnet:retrieve_user(Pid,"[ACCESS TOKEN]", "@erikh").
+]]></pre></p>
 
 @end

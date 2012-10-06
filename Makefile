@@ -11,8 +11,13 @@ compile:
 docs:
 	@$(REBAR) doc
 
-test: compile
-	@ERL_FLAGS="-args_file test.args" $(REBAR) skip_deps=true eunit
+test: test-anonymous test-authenticated
+
+test-anonymous: compile
+	@$(REBAR) eunit skip_deps=true suites=anonymous_tests
+
+test-authenticated: compile
+	@ERL_FLAGS="-args_file test.args" $(REBAR) eunit skip_deps=true suites=authenticated_tests
 
 clean:
 	@$(REBAR) clean

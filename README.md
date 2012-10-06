@@ -8,7 +8,28 @@ Copyright (c) 2012 Erik Hedenstršm
 __Version:__ 1.0.0
 
 
-__Authors:__ Erik Hedenstršm ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).Erlang library for App.net
+__Authors:__ Erik Hedenstršm ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).
+
+[![Build Status](https://secure.travis-ci.org/ehedenst/erlang-appdotnet.png)](http://travis-ci.org/ehedenst/erlang-appdotnet)
+
+###<a name="Quick_Start">Quick Start</a>##
+
+
+<pre>
+    application:start(crypto),
+    application:start(public_key),
+    application:start(ssl),
+    application:start(ibrowse),
+    {ok, Data} = appdotnet:retrieve_user("[ACCESS TOKEN]", "@erikh").
+</pre>
+
+or
+
+<pre>
+    application:start(appdotnet),
+    {ok, Pid} = appdotnet_client:start(),
+    {ok, Data} = appdotnet:retrieve_user(Pid,"[ACCESS TOKEN]", "@erikh").
+</pre>
 
 
 ##Modules##
