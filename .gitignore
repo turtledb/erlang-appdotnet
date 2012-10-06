@@ -2,6 +2,7 @@
 .project
 .settings
 test.args
+doc
 deps
 ebin
 logs
