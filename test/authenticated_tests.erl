@@ -2,7 +2,7 @@
 %% @doc @todo Add description to appdotnet_tests.
 
 
--module(appdotnet_tests).
+-module(authenticated_tests).
 
 -include_lib("eunit/include/eunit.hrl").
 
@@ -32,15 +32,14 @@ list_followers_test() ->
     application:start(appdotnet),
     {ok, AccessToken} = application:get_env(appdotnet,access_token),
     {ok, Pid} = appdotnet_client:start(),
-    {ok, Data} = appdotnet_client:list_followers(Pid, AccessToken, "@erikh"),
+    {ok, _Data} = appdotnet_client:list_followers(Pid, AccessToken, "@erikh"),
     appdotnet_client:stop(Pid).
 
 check_current_token_test() ->
     application:start(appdotnet),
     {ok, AccessToken} = application:get_env(appdotnet,access_token),
     {ok, Pid} = appdotnet_client:start(),
-    {ok, Data} = appdotnet_client:check_current_token(Pid, AccessToken),
-    error_logger:info_report(Data),
+    {ok, _Data} = appdotnet_client:check_current_token(Pid, AccessToken),
     appdotnet_client:stop(Pid).
 
 %% ====================================================================
