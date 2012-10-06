@@ -11,8 +11,14 @@
 %% API functions
 %% ====================================================================
 -export([start/0,start/1,stop/1,start_link/1]).
+
 -export([authenticate_url/3,authenticate_url/4,access_token/5]).
--export([retrieve_user/3,follow_user/3,unfollow_user/3,followers/3,following/3]).
+
+-export([retrieve_user/3,follow_user/3,unfollow_user/3,list_following/3,list_followers/3]).
+-export([mute_user/3,unmute_user/3,list_muted/2]).
+-export([search_for_users/3,list_reposters/3,list_stars/3]).
+
+-export([check_current_token/2]).
 
 start() ->
     start([]).
@@ -39,19 +45,41 @@ access_token(Pid, ClientId, ClientSecret, RedirectURI, Code) ->
     gen_server:call(Pid, {access_token, ClientId, ClientSecret, RedirectURI, Code}, ?CALL_TIMEOUT).
 
 retrieve_user(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, get, "/stream/0/users/"++UserId}, ?CALL_TIMEOUT).
+    gen_server:call(Pid, {resource, retrieve_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
 follow_user(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, post, "/stream/0/users/"++UserId++"/follow"}, ?CALL_TIMEOUT).
+    gen_server:call(Pid, {resource, follow_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
 unfollow_user(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, delete, "/stream/0/users/"++UserId++"/follow"}, ?CALL_TIMEOUT).
+    gen_server:call(Pid, {resource, unfollow_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
-following(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, get, "/stream/0/users/"++UserId++"/following"}, ?CALL_TIMEOUT).
+list_following(Pid, AccessToken, UserId) ->
+    gen_server:call(Pid, {resource, list_following, [AccessToken,UserId]}, ?CALL_TIMEOUT).
 
-followers(Pid, AccessToken, UserId) ->
-    gen_server:call(Pid, {resource, AccessToken, get, "/stream/0/users/"++UserId++"/followers"}, ?CALL_TIMEOUT).
+list_followers(Pid, AccessToken, UserId) ->
+    gen_server:call(Pid, {resource, list_followers, [AccessToken,UserId]}, ?CALL_TIMEOUT).
+
+mute_user(Pid, AccessToken, UserId) ->
+    gen_server:call(Pid, {resource, mute_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
+
+unmute_user(Pid, AccessToken, UserId) ->
+    gen_server:call(Pid, {resource, unmute_user, [AccessToken,UserId]}, ?CALL_TIMEOUT).
+
+list_muted(Pid, AccessToken) ->
+    gen_server:call(Pid, {resource, list_muted, [AccessToken]}, ?CALL_TIMEOUT).
+
+search_for_users(Pid, AccessToken, Query) ->
+    gen_server:call(Pid, {resource, search_for_users, [AccessToken,Query]}, ?CALL_TIMEOUT).
+
+list_reposters(Pid, AccessToken, PostId) ->
+    gen_server:call(Pid, {resource, list_reposters, [AccessToken,PostId]}, ?CALL_TIMEOUT).
+
+list_stars(Pid, AccessToken, PostId) ->
+    gen_server:call(Pid, {resource, list_stars, [AccessToken,PostId]}, ?CALL_TIMEOUT).
+
+check_current_token(Pid, AccessToken) ->
+    gen_server:call(Pid, {resource, check_current_token, [AccessToken]}, ?CALL_TIMEOUT).
+
 
 %% ====================================================================
 %% Behavioural functions 
@@ -94,41 +122,13 @@ init(_Args) ->
                    Reason :: term().
 %% ====================================================================
 handle_call({authenticate_url, ClientId, RedirectURI, Scope}, _From, State) ->
-    Params = [{"client_id",ClientId},
-              {"response_type","code"},
-              {"redirect_uri",RedirectURI},
-              {"scope", string:join(Scope,",")}
-             ],
-    URL = "https://alpha.app.net/oauth/authenticate?" ++ url_encode(Params),
-    {reply, {ok, URL}, State};
+    {reply, appdotnet:authenticate_url(ClientId, RedirectURI, Scope), State};
 
 handle_call({access_token, ClientId, ClientSecret, RedirectURI, Code}, _From, State) ->
-    Params = [{"client_id",ClientId},
-              {"client_secret",ClientSecret},
-              {"grant_type","authorization_code"},
-              {"redirect_uri",RedirectURI},
-              {"code", Code}
-             ],
-    case ibrowse:send_req("https://alpha.app.net/oauth/access_token", [{"Content-Type","application/x-www-form-urlencoded"}], post, url_encode(Params)) of
-        {ok, [$2|_], _Headers, Body} ->
-            Data = jsx:decode(list_to_binary(Body)),
-            BinaryAccessToken = proplists:get_value(<<"access_token">>, Data),
-            {reply, {ok, binary_to_list(BinaryAccessToken)}, State};
-        {ok, StatusCode, Headers, Body} ->
-            {reply, {error, {list_to_integer(StatusCode), Headers, Body}}, State};
-        {error, Reason} ->
-            {reply, {error, Reason}, State}
-    end;
+    {reply, appdotnet:access_token(ClientId, ClientSecret, RedirectURI, Code), State};
 
-handle_call({resource, AccessToken, Method, Path}, _From, State) ->
-    case ibrowse:send_req("https://alpha-api.app.net/"++Path, [{"Authorization","Bearer "++AccessToken}], Method, []) of
-        {ok, [$2|_], _Headers, Body} ->
-            {reply, {ok, jsx:decode(list_to_binary(Body))}, State};
-        {ok, StatusCode, Headers, Body} ->
-            {reply, {error, {list_to_integer(StatusCode), Headers, Body}}, State};
-        {error, Reason} ->
-            {reply, {error, Reason}, State}
-    end;
+handle_call({resource, Function, Args}, _From, State) ->
+    {reply, erlang:apply(appdotnet, Function, Args), State};
 
 handle_call(_Request, _From, State) ->
     {reply, ok, State}.
@@ -196,11 +196,3 @@ code_change(_OldVsn, State, _Extra) ->
 %% ====================================================================
 %% Internal functions
 %% ====================================================================
-url_encode(Params) ->
-    url_encode(Params,"").
-
-url_encode([],[_|Acc]) ->
-    Acc;
-
-url_encode([{Key,Value}|Params],Acc) ->
-    url_encode(Params, Acc ++ "&" ++ ibrowse_lib:url_encode(Key) ++ "=" ++ ibrowse_lib:url_encode(Value)).
