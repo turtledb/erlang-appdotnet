@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Erlang-appdotnet by ehedenst</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Erlang-appdotnet</h1>
+        <p>App.net for Erlang</p>
+
+        <p class="view"><a href="https://github.com/ehedenst/erlang-appdotnet">View the Project on GitHub <small>ehedenst/erlang-appdotnet</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ehedenst/erlang-appdotnet/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ehedenst/erlang-appdotnet/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ehedenst/erlang-appdotnet">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>App.net for Erlang</h1>
+
+<p>Copyright (c) 2012 Erik Hedenström</p>
+
+<p><strong>Version:</strong> 1.0.0</p>
+
+<p><strong>Authors:</strong> Erik Hedenström (<a href="mailto:erik@hedenstroem.com"><code>erik@hedenstroem.com</code></a>).</p>
+
+<p><strong>License:</strong> MIT</p>
+
+<p><strong>Build Status:</strong> <a href="http://travis-ci.org/ehedenst/erlang-appdotnet"><img src="https://secure.travis-ci.org/ehedenst/erlang-appdotnet.png" alt="Build Status"></a></p>
+
+<h3><a name="Donations_&amp;_Endorsements">Donations &amp; Endorsements</a></h3>
+
+<p>Any donation is much appreciated! It will be used to pay for my <a href="https://alpha.app.net/erikh">app.net</a> developer account as well as maintaining this project.</p>
+
+<p><a href="https://flattr.com/submit/auto?user_id=ehedenst&amp;url=https://github.com/ehedenst/erlang-appdotnet&amp;title=App.net%20for%20Erlang&amp;language=&amp;tags=github&amp;category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this git repo"></a></p>
+
+<p><a href="http://coderwall.com/ehedenst"><img src="http://api.coderwall.com/ehedenst/endorsecount.png" alt="Endorse ehedenst on Coderwall"></a></p>
+
+<h3><a name="Quick_Start">Quick Start</a></h3>
+
+<p>Replace "..." in the examples below with an access token from <a href="https://alpha.app.net/developer/apps/">your apps</a>.</p>
+
+<pre>
+    AccessToken = "...",
+    application:start(crypto),
+    application:start(public_key),
+    application:start(ssl),
+    application:start(ibrowse),
+    {ok, Data} = appdotnet:retrieve_user(AccessToken, "@erikh").
+</pre>
+
+<p>or</p>
+
+<pre>
+    AccessToken = "...",
+    application:start(appdotnet),
+    {ok, Pid} = appdotnet_client:start(),
+    {ok, Data} = appdotnet:retrieve_user(Pid, AccessToken, "@erikh").
+</pre>
+
+<h2>Modules</h2>
+
+<table width="100%" border="0" summary="list of modules">
+<tr><td><a href="https://github.com/ehedenst/erlang-appdotnet/blob/master/doc/anonymous_tests.md">anonymous_tests</a></td></tr>
+<tr><td><a href="https://github.com/ehedenst/erlang-appdotnet/blob/master/doc/appdotnet.md">appdotnet</a></td></tr>
+<tr><td><a href="https://github.com/ehedenst/erlang-appdotnet/blob/master/doc/appdotnet_app.md">appdotnet_app</a></td></tr>
+<tr><td><a href="https://github.com/ehedenst/erlang-appdotnet/blob/master/doc/appdotnet_client.md">appdotnet_client</a></td></tr>
+<tr><td><a href="https://github.com/ehedenst/erlang-appdotnet/blob/master/doc/appdotnet_sup.md">appdotnet_sup</a></td></tr>
+<tr><td><a href="https://github.com/ehedenst/erlang-appdotnet/blob/master/doc/authenticated_tests.md">authenticated_tests</a></td></tr>
+</table>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ehedenst">ehedenst</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
