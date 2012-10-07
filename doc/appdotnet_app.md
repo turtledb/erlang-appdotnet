@@ -10,7 +10,7 @@
 
 __Behaviours:__ [`application`](application.md).
 
-__Authors:__ erikh.<a name="index"></a>
+__Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).<a name="index"></a>
 
 ##Function Index##
 

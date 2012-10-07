@@ -1,4 +1,4 @@
-%% @author erikh
+%% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
 %% @doc @todo Add description to appdotnet_tests.
 
 

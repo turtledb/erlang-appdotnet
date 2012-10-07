@@ -3,14 +3,19 @@
 #erlang-appdotnet#
 
 
-Copyright (c) 2012 Erik Hedenstršm
+Copyright (c) 2012 Erik Erik Hedenstr&ouml;m
 
 __Version:__ 1.0.0
 
 
-__Authors:__ Erik Hedenstršm ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).
+__Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).
 
 [![Build Status](https://secure.travis-ci.org/ehedenst/erlang-appdotnet.png)](http://travis-ci.org/ehedenst/erlang-appdotnet)
+
+Any donations to pay for my app.net developer account would be appreciated.
+
+<iframe style="border: 0; margin: 0; padding: 0;" src="https://www.gittip.com/ehedenst/widget.html" width="48pt" height="20pt"></iframe>
+
 
 ###<a name="Quick_Start">Quick Start</a>##
 

@@ -1,5 +1,4 @@
-%% @author erikh
-%% @doc @todo Add description to appdotnet_tests.
+%% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
 
 
 -module(authenticated_tests).
@@ -10,14 +9,6 @@
 %% API functions
 %% ====================================================================
 -export([]).
-
-authorize_url_test() ->
-    application:start(appdotnet),
-    {ok, ClientId} = application:get_env(appdotnet,client_id),
-    {ok, Pid} = appdotnet_client:start(),
-    {ok, URL} = appdotnet_client:authenticate_url(Pid, ClientId, "http://localhost", ["stream","email"]),
-    ?assertEqual("https://alpha.app.net/oauth/authenticate?client_id=p7wqkeWtqJbqhM5cemehvScLLtRWAWxs&response_type=code&redirect_uri=http%3a%2f%2flocalhost&scope=stream%2cemail",URL),
-    appdotnet_client:stop(Pid).
 
 retrieve_user_test() ->
     application:start(appdotnet),
