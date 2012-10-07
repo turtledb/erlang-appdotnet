@@ -1,32 +1,41 @@
 @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
-@copyright 2012 Erik Erik Hedenstr&ouml;m
+@copyright 2012 Erik Hedenstr&ouml;m
 @version 1.0.0
-
-@title erlang-appdotnet
-
+@title App.net for Erlang
 @doc
 
-<p>[![Build Status](https://secure.travis-ci.org/ehedenst/erlang-appdotnet.png)](http://travis-ci.org/ehedenst/erlang-appdotnet)</p>
+__License:__ MIT
 
-Any donation to pay for my app.net developer account is much appreciated!
-<iframe style="border: 0; margin: 0; padding: 0;" src="https://www.gittip.com/ehedenst/widget.html" width="48pt" height="20pt"></iframe>
+<p>__Build Status:__ [![Build Status](https://secure.travis-ci.org/ehedenst/erlang-appdotnet.png)](http://travis-ci.org/ehedenst/erlang-appdotnet)</p>
+
+== Donations ==
+
+Any donation is much appreciated! It will be used to pay for my <a href="https://alpha.app.net/erikh">app.net</a> developer account as well as maintaining this project.
+
+<p><![CDATA[
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ehedenst&url=https://github.com/ehedenst/erlang-appdotnet&title=App.net%20for%20Erlang&language=&tags=github&category=software) 
+]]></p>
 
 == Quick Start ==
 
+Replace "..." in the examples below with an access token from <a href="https://alpha.app.net/developer/apps/">your apps</a>.
+
 <p><pre><![CDATA[
+    AccessToken = "...",
     application:start(crypto),
     application:start(public_key),
     application:start(ssl),
     application:start(ibrowse),
-    {ok, Data} = appdotnet:retrieve_user("[ACCESS TOKEN]", "@erikh").
+    {ok, Data} = appdotnet:retrieve_user(AccessToken, "@erikh").
 ]]></pre></p>
 
 or
 
 <p><pre><![CDATA[
+    AccessToken = "...",
     application:start(appdotnet),
     {ok, Pid} = appdotnet_client:start(),
-    {ok, Data} = appdotnet:retrieve_user(Pid,"[ACCESS TOKEN]", "@erikh").
+    {ok, Data} = appdotnet:retrieve_user(Pid, AccessToken, "@erikh").
 ]]></pre></p>
 
 @end
