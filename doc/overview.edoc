@@ -8,12 +8,16 @@ __License:__ MIT
 
 <p>__Build Status:__ [![Build Status](https://secure.travis-ci.org/ehedenst/erlang-appdotnet.png)](http://travis-ci.org/ehedenst/erlang-appdotnet)</p>
 
-== Donations ==
+== Donations &amp; Endorsements ==
 
 Any donation is much appreciated! It will be used to pay for my <a href="https://alpha.app.net/erikh">app.net</a> developer account as well as maintaining this project.
 
 <p><![CDATA[
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ehedenst&url=https://github.com/ehedenst/erlang-appdotnet&title=App.net%20for%20Erlang&language=&tags=github&category=software) 
+]]></p>
+
+<p><![CDATA[
+[![Endorse ehedenst on Coderwall](http://api.coderwall.com/ehedenst/endorsecount.png)](http://coderwall.com/ehedenst) 
 ]]></p>
 
 == Quick Start ==
