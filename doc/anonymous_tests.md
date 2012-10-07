@@ -6,4 +6,4 @@
 
 @todo Add description to appdotnet_tests.
 
-__Authors:__ erikh.
+__Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).
