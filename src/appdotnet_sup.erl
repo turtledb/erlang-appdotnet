@@ -1,5 +1,4 @@
-%% @author erikh
-%% @doc @todo Add description to appdotnet_sup.
+%% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
 
 -module(appdotnet_sup).
 -behaviour(supervisor).
@@ -10,8 +9,10 @@
 %% ===================================================================
 -export([start_link/0]).
 
-%% start_link/1
+%% start_link/0
 %% ====================================================================
+%% @doc <a href="http://www.erlang.org/doc/man/supervisor.html#start_link-2">supervisor:start_link/2</a>
+
 -spec start_link() -> 
           Result when
                    Result :: {ok, pid()}

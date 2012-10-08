@@ -1,21 +1,18 @@
 
 
 #Module appdotnet_sup#
-* [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
 
 
-@todo Add description to appdotnet_sup.
-
 __Behaviours:__ [`supervisor`](supervisor.md).
 
-__Authors:__ erikh.<a name="index"></a>
+__Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).<a name="index"></a>
 
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#init-1">init/1</a></td><td><a href="http://www.erlang.org/doc/man/supervisor.html#Module:init-1">supervisor:init/1</a></td></tr><tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td></td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#init-1">init/1</a></td><td><a href="http://www.erlang.org/doc/man/supervisor.html#Module:init-1">supervisor:init/1</a></td></tr><tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td><a href="http://www.erlang.org/doc/man/supervisor.html#start_link-2">supervisor:start_link/2</a></td></tr></table>
 
 
 <a name="functions"></a>
@@ -38,3 +35,4 @@ __Authors:__ erikh.<a name="index"></a>
 <pre>start_link() -&gt; Result</pre>
 <ul class="definitions"><li><pre>Result = {ok, pid()} | ignore | {error, StartlinkErr}</pre></li><li><pre>StartlinkErr = {already_started, pid()} | shutdown | term()</pre></li></ul>
 
+[supervisor:start_link/2](http://www.erlang.org/doc/man/supervisor.html#start_link-2)

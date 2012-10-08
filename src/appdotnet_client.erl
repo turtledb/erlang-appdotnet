@@ -25,10 +25,16 @@ start() ->
 
 start(Args) ->
     case whereis(appdotnet_sup) of
-        undefined -> application:start(appdotnet);
-        _ -> ok
-    end,
-    supervisor:start_child(appdotnet_sup, [Args]).
+        undefined ->
+            case application:start(appdotnet) of
+                ok ->
+                    supervisor:start_child(appdotnet_sup, [Args]);
+                Error ->
+                    Error
+            end;
+        _ ->
+            supervisor:start_child(appdotnet_sup, [Args])
+    end.
 
 stop(Pid) ->
     gen_server:cast(Pid, stop).

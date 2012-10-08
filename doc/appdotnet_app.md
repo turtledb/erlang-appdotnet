@@ -1,12 +1,9 @@
 
 
 #Module appdotnet_app#
-* [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
 
-
-@todo Add description to appdotnet_app.
 
 __Behaviours:__ [`application`](application.md).
 
