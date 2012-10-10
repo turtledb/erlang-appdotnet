@@ -1,5 +1,5 @@
 %% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
-%% @doc @todo Add description to appdotnet_app.
+%% @copyright 2012 Erik Hedenstr&ouml;m
 
 -module(appdotnet_app).
 -behaviour(application).
@@ -17,12 +17,16 @@
                    Result :: {ok, Pid :: pid()} | {error, Reason :: term()}.
 %% ====================================================================
 start(_Type, _Args) ->
-    start_ssl(),
-    case appdotnet_sup:start_link() of
-        {ok, Pid} ->
-            {ok, Pid};
-        Error ->
-            Error
+    case start_deps() of
+        {_,[]} ->
+            case appdotnet_sup:start_link() of
+                {ok, Pid} ->
+                    {ok, Pid};
+                Error ->
+                    Error
+            end;
+        {_,NotStarted} ->
+            {error,{not_started,NotStarted}}
     end.
 
 
@@ -38,17 +42,16 @@ stop(_State) ->
 %% ====================================================================
 %% Internal functions
 %% ====================================================================
+-spec start_deps() -> {[atom()],[atom()]}.
+start_deps() ->
+    lists:partition(fun(App) ->
+                            ensure_started(App)
+                    end, [crypto, public_key, ssl, ibrowse]).
 
-start_ssl() ->
-    ok = ensure_started(crypto),
-    ok = ensure_started(public_key),
-    ok = ensure_started(ssl),
-    ok = ensure_started(ibrowse).
-
-
+-spec ensure_started(App :: atom()) -> boolean().
 ensure_started(App) ->
     case application:start(App) of
-        ok -> ok;
-        {error, {already_started, App}} -> ok;
-        Err -> Err
+        ok -> true;
+        {error, {already_started, App}} -> true;
+        {error, _} -> false
     end.

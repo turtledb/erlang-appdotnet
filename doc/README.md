@@ -44,7 +44,7 @@ or
     AccessToken = "...",
     application:start(appdotnet),
     {ok, Pid} = appdotnet_client:start(),
-    {ok, Data} = appdotnet:retrieve_user(Pid, AccessToken, "@erikh").
+    {ok, Data} = appdotnet:q(Pid, retrieve_user, [AccessToken, "@erikh"]).
 </pre>
 
 

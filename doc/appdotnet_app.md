@@ -1,12 +1,11 @@
 
 
 #Module appdotnet_app#
-* [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
 
 
-@todo Add description to appdotnet_app.
+Copyright (c) 2012 Erik Hedenstr&ouml;m
 
 __Behaviours:__ [`application`](application.md).
 

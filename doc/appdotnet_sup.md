@@ -1,21 +1,20 @@
 
 
 #Module appdotnet_sup#
-* [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
 
 
-@todo Add description to appdotnet_sup.
+Copyright (c) 2012 Erik Hedenstr&ouml;m
 
 __Behaviours:__ [`supervisor`](supervisor.md).
 
-__Authors:__ erikh.<a name="index"></a>
+__Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).<a name="index"></a>
 
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#init-1">init/1</a></td><td><a href="http://www.erlang.org/doc/man/supervisor.html#Module:init-1">supervisor:init/1</a></td></tr><tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td></td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#init-1">init/1</a></td><td><a href="http://www.erlang.org/doc/man/supervisor.html#Module:init-1">supervisor:init/1</a></td></tr><tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td><a href="http://www.erlang.org/doc/man/supervisor.html#start_link-2">supervisor:start_link/2</a></td></tr></table>
 
 
 <a name="functions"></a>
@@ -27,8 +26,9 @@ __Authors:__ erikh.<a name="index"></a>
 ###init/1##
 
 
-<pre>init(Args::term()) -&gt; Result</pre>
-<ul class="definitions"><li><pre>Result = {ok, {SupervisionPolicy, [ChildSpec]}} | ignore</pre></li><li><pre>SupervisionPolicy = {RestartStrategy, MaxR::non_neg_integer(), MaxT::pos_integer()}</pre></li><li><pre>RestartStrategy = one_for_all | one_for_one | rest_for_one | simple_one_for_one</pre></li><li><pre>ChildSpec = {Id::term(), StartFunc, RestartPolicy, Type::worker | supervisor, Modules}</pre></li><li><pre>StartFunc = {M::module(), F::atom(), A::[term()] | undefined}</pre></li><li><pre>RestartPolicy = permanent | transient | temporary</pre></li><li><pre>Modules = [module()] | dynamic</pre></li></ul>
+<pre>init(Args::term()) -> {ok, {{RestartStrategy::<a href="supervisor.md#type-strategy">supervisor:strategy()</a>, MaxR::non_neg_integer(), MaxT::non_neg_integer()}, [ChildSpec::<a href="supervisor.md#type-child_spec">supervisor:child_spec()</a>]}} | ignore</pre>
+<br></br>
+
 
 [supervisor:init/1](http://www.erlang.org/doc/man/supervisor.html#Module:init-1)<a name="start_link-0"></a>
 
@@ -38,3 +38,4 @@ __Authors:__ erikh.<a name="index"></a>
 <pre>start_link() -&gt; Result</pre>
 <ul class="definitions"><li><pre>Result = {ok, pid()} | ignore | {error, StartlinkErr}</pre></li><li><pre>StartlinkErr = {already_started, pid()} | shutdown | term()</pre></li></ul>
 
+[supervisor:start_link/2](http://www.erlang.org/doc/man/supervisor.html#start_link-2)

@@ -1,5 +1,5 @@
-%% @author erikh
-%% @doc @todo Add description to appdotnet_sup.
+%% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
+%% @copyright 2012 Erik Hedenstr&ouml;m
 
 -module(appdotnet_sup).
 -behaviour(supervisor).
@@ -10,8 +10,9 @@
 %% ===================================================================
 -export([start_link/0]).
 
-%% start_link/1
+%% start_link/0
 %% ====================================================================
+%% @doc <a href="http://www.erlang.org/doc/man/supervisor.html#start_link-2">supervisor:start_link/2</a>
 -spec start_link() -> 
           Result when
                    Result :: {ok, pid()}
@@ -32,20 +33,12 @@ start_link() ->
 %% init/1
 %% ====================================================================
 %% @doc <a href="http://www.erlang.org/doc/man/supervisor.html#Module:init-1">supervisor:init/1</a>
--spec init(Args :: term()) -> 
-          Result when
-                   Result :: {ok, {SupervisionPolicy, [ChildSpec]}} | ignore,
-                   SupervisionPolicy :: {RestartStrategy, MaxR :: non_neg_integer(), MaxT :: pos_integer()},
-                   RestartStrategy :: one_for_all
-                       | one_for_one
-                       | rest_for_one
-                       | simple_one_for_one,
-                   ChildSpec :: {Id :: term(), StartFunc, RestartPolicy, Type :: worker | supervisor, Modules},
-                   StartFunc :: {M :: module(), F :: atom(), A :: [term()] | undefined},
-                   RestartPolicy :: permanent
-                       | transient
-                       | temporary,
-                   Modules :: [module()] | dynamic.
+-spec init(Args :: term()) ->
+          {ok, {{RestartStrategy :: supervisor:strategy(),
+                 MaxR            :: non_neg_integer(),
+                 MaxT            :: non_neg_integer()},
+                [ChildSpec :: supervisor:child_spec()]}}
+              | ignore.
 %% ====================================================================
 init([]) ->
     Child = {appdotnet_client,{appdotnet_client,start_link,[]},
