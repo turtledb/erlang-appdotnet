@@ -5,6 +5,8 @@
 * [Function Details](#functions)
 
 
+Copyright (c) 2012 Erik Hedenstr&ouml;m
+
 __Behaviours:__ [`application`](application.md).
 
 __Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).<a name="index"></a>

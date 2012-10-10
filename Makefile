@@ -1,7 +1,7 @@
 ERL      ?= erl
 APP      := appdotnet
 VSN      := $(shell sed -n 's/.*{vsn,.*"\(.*\)"}.*/\1/p' src/appdotnet.app.src)
-REBAR    := ./rebar -vv
+REBAR    := ./rebar
 DIALYZER ?= dialyzer
 
 all: compile docs

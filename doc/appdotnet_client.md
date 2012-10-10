@@ -1,16 +1,15 @@
 
 
 #Module appdotnet_client#
-* [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
 
 
-@todo Add description to appdotnet_client.
+Copyright (c) 2012 Erik Hedenstr&ouml;m
 
 __Behaviours:__ [`gen_server`](gen_server.md).
 
-__Authors:__ erikh.<a name="index"></a>
+__Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).<a name="index"></a>
 
 ##Function Index##
 

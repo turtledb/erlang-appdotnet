@@ -1,9 +1,8 @@
 
 
 #Module anonymous_tests#
-* [Description](#description)
 
 
-@todo Add description to appdotnet_tests.
+Copyright (c) 2012 Erik Hedenstr&ouml;m
 
 __Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).

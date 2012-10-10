@@ -5,6 +5,8 @@
 * [Function Details](#functions)
 
 
+Copyright (c) 2012 Erik Hedenstr&ouml;m
+
 __Behaviours:__ [`supervisor`](supervisor.md).
 
 __Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstroem.com)).<a name="index"></a>
@@ -24,8 +26,9 @@ __Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstr
 ###init/1##
 
 
-<pre>init(Args::term()) -&gt; Result</pre>
-<ul class="definitions"><li><pre>Result = {ok, {SupervisionPolicy, [ChildSpec]}} | ignore</pre></li><li><pre>SupervisionPolicy = {RestartStrategy, MaxR::non_neg_integer(), MaxT::pos_integer()}</pre></li><li><pre>RestartStrategy = one_for_all | one_for_one | rest_for_one | simple_one_for_one</pre></li><li><pre>ChildSpec = {Id::term(), StartFunc, RestartPolicy, Type::worker | supervisor, Modules}</pre></li><li><pre>StartFunc = {M::module(), F::atom(), A::[term()] | undefined}</pre></li><li><pre>RestartPolicy = permanent | transient | temporary</pre></li><li><pre>Modules = [module()] | dynamic</pre></li></ul>
+<pre>init(Args::term()) -> {ok, {{RestartStrategy::<a href="supervisor.md#type-strategy">supervisor:strategy()</a>, MaxR::non_neg_integer(), MaxT::non_neg_integer()}, [ChildSpec::<a href="supervisor.md#type-child_spec">supervisor:child_spec()</a>]}} | ignore</pre>
+<br></br>
+
 
 [supervisor:init/1](http://www.erlang.org/doc/man/supervisor.html#Module:init-1)<a name="start_link-0"></a>
 

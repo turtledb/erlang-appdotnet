@@ -1,4 +1,5 @@
 %% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
+%% @copyright 2012 Erik Hedenstr&ouml;m
 
 -module(appdotnet_app).
 -behaviour(application).
