@@ -1,5 +1,4 @@
 %% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
-%% @copyright 2012 Erik Hedenstr&ouml;m
 
 -module(authenticated_tests).
 
@@ -10,40 +9,35 @@
 %% ====================================================================
 -export([]).
 
-retrieve_user_test() ->
-    _ = application:start(appdotnet),
-    {ok, AccessToken} = application:get_env(appdotnet,access_token),
-    {ok, Pid} = appdotnet_client:start(),
-    {ok, Data} = appdotnet_client:q(Pid, retrieve_user, [AccessToken, "@erikh"]),
-    Id = rget_kv([<<"data">>,<<"id">>], Data),
-    ?assertEqual(<<"19697">>,Id),
-    appdotnet_client:stop(Pid).
-
-list_followers_test() ->
-    _ = application:start(appdotnet),
-    {ok, AccessToken} = application:get_env(appdotnet,access_token),
-    {ok, Pid} = appdotnet_client:start(),
-    {ok, _Data} = appdotnet_client:q(Pid, list_followers, [AccessToken, "@erikh"]),
-    appdotnet_client:stop(Pid).
-
-check_current_token_test() ->
-    _ = application:start(appdotnet),
-    {ok, AccessToken} = application:get_env(appdotnet,access_token),
-    {ok, Pid} = appdotnet_client:start(),
-    {ok, _Data} = appdotnet_client:q(Pid, check_current_token, [AccessToken]),
-    appdotnet_client:stop(Pid).
+client_test_() ->
+    {setup, fun setup/0, fun teardown/1,
+     {with, [
+             fun retrieve_user_test/1,
+             fun list_followers_test/1,
+             fun check_current_token_test/1
+            ]
+     }
+    }.
 
 %% ====================================================================
 %% Internal functions
 %% ====================================================================
-rget_kv(Keys,List) ->
-    rget_kv(Keys,List,undefined).
+setup() ->
+    ok = application:start(appdotnet),
+    {ok, Pid} = appdotnet_client:start(),
+    {ok, AccessToken} = application:get_env(appdotnet,access_token),
+    {Pid, AccessToken}.
 
-rget_kv(_Keys,[],Default) ->
-    Default;
+teardown({Pid, _AccessToken}) ->
+    appdotnet_client:stop(Pid).
 
-rget_kv([Key],List,Default) ->
-    proplists:get_value(Key, List, Default);
+retrieve_user_test({Pid, AccessToken}) ->
+    {ok, User, _Meta} = appdotnet_client:q(Pid, retrieve_user, [AccessToken, "@erikh"]),
+    Id = proplists:get_value(<<"id">>, User),
+    ?assertEqual(<<"19697">>, Id).
 
-rget_kv([Key|Keys],List,Default) ->
-    rget_kv(Keys,proplists:get_value(Key, List, []),Default).
+list_followers_test({Pid, AccessToken}) ->
+    {ok, _Data, _Meta} = appdotnet_client:q(Pid, list_followers, [AccessToken, "@erikh"]).
+
+check_current_token_test({Pid, AccessToken}) ->
+    {ok, _Data, _Meta} = appdotnet_client:q(Pid, check_current_token, [AccessToken]).

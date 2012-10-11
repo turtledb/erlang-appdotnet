@@ -1,6 +1,8 @@
 %% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
 %% @doc Erlang implementation of the App.net <a href="https://github.com/appdotnet/api-spec">API Specification</a>
 
+%% @todo Implement <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#general-parameters">general parameters</a> for posts.
+
 -module(appdotnet).
 
 %%
@@ -25,7 +27,7 @@
 -export([list_starred/2,list_mentions/2,list_tagged/1]).
 -export([personal_stream/1,global_stream/0]).
 
--type http_response() :: {ok, JSON :: jsx:json_term()} | {error, Reason :: term()}.
+-type http_response() :: {ok, Data :: jsx:json_term(), Meta :: jsx:json_term()} | {error, Reason :: term()}.
 
 %%
 %% API Functions
@@ -262,9 +264,10 @@ get_resource(AccessToken, Method, Path) ->
 
 -spec send_req(URL :: string(), Headers :: [{string(),string()}], Method :: get | post | delete, ReqBody :: string() | binary()) -> http_response().
 send_req(URL, Headers, Method, ReqBody) ->
-    case ibrowse:send_req(URL, Headers, Method, ReqBody) of
+    case ibrowse:send_req(URL, [{"X-ADN-Migration-Overrides","response_envelope=1"} | Headers], Method, ReqBody) of
         {ok, [$2|_], _Headers, Body} ->
-            {ok, jsx:decode(list_to_binary(Body))};
+            Response = jsx:decode(list_to_binary(Body)),
+            {ok, proplists:get_value(<<"data">>, Response, []), proplists:get_value(<<"meta">>, Response, [])};
         {ok, StatusCode, Headers, Body} ->
             {error, {list_to_integer(StatusCode), Headers, Body}};
         {error, Reason} ->

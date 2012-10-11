@@ -21,7 +21,7 @@ __Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstr
 
 
 
-<pre>http_response() = {ok, JSON::<a href="jsx.md#type-json_term">jsx:json_term()</a>} | {error, Reason::term()}</pre>
+<pre>http_response() = {ok, Data::<a href="jsx.md#type-json_term">jsx:json_term()</a>, Meta::<a href="jsx.md#type-json_term">jsx:json_term()</a>} | {error, Reason::term()}</pre>
 <a name="index"></a>
 
 ##Function Index##
