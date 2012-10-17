@@ -5,7 +5,7 @@
 -behaviour(gen_server).
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
 
--define(CALL_TIMEOUT, 30000). 
+-define(CALL_TIMEOUT, 30000).
 
 %% ====================================================================
 %% API functions
@@ -36,12 +36,12 @@ stop(Pid) ->
 start_link(Args) ->
     gen_server:start_link(?MODULE, Args, []).
 
--spec q(Pid :: pid(), Function :: atom(), Args :: list()) -> {ok, term()} | {error, term()}.
+-spec q(Pid :: pid(), Function :: atom(), Args :: list()) ->  {ok, URL :: string()} | appdotnet:http_response().
 q(Pid, Function, Args) ->
     gen_server:call(Pid, {apply, Function, Args}, ?CALL_TIMEOUT).
 
 %% ====================================================================
-%% Behavioural functions 
+%% Behavioural functions
 %% ====================================================================
 -record(state, {}).
 
