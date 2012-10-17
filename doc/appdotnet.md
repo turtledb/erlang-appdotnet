@@ -43,7 +43,7 @@ __Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstr
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#access_token-4">access_token/4</a></td><td>Retrieve an access token.</td></tr><tr><td valign="top"><a href="#authenticate_url-2">authenticate_url/2</a></td><td>Generate an authentication URL with default scope.</td></tr><tr><td valign="top"><a href="#authenticate_url-3">authenticate_url/3</a></td><td>Generate an authentication URL.</td></tr><tr><td valign="top"><a href="#check_current_token-1">check_current_token/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/token.md#retrieve-current-token">Check current Token</a></td></tr><tr><td valign="top"><a href="#create_complex_post-2">create_complex_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post">Create a complex Post</a></td></tr><tr><td valign="top"><a href="#create_post-2">create_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post">Create a Post</a></td></tr><tr><td valign="top"><a href="#create_reply-3">create_reply/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post">Create a Reply</a></td></tr><tr><td valign="top"><a href="#delete_post-2">delete_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#delete-a-post">Delete a Post</a></td></tr><tr><td valign="top"><a href="#follow_user-2">follow_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#follow-a-user">Follow a User</a></td></tr><tr><td valign="top"><a href="#list_followers-2">list_followers/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-users-following-a-user">List users following a User</a></td></tr><tr><td valign="top"><a href="#list_following-2">list_following/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-users-a-user-is-following">List users a User is following</a></td></tr><tr><td valign="top"><a href="#list_muted-1">list_muted/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-muted-users">List muted Users</a></td></tr><tr><td valign="top"><a href="#list_reposters-2">list_reposters/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-users-who-have-reposted-a-post">List Users who have reposted a Post</a></td></tr><tr><td valign="top"><a href="#list_stars-2">list_stars/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-users-who-have-starred-a-post">List Users who have starred a Post</a></td></tr><tr><td valign="top"><a href="#mute_user-2">mute_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#mute-a-user">Mute a User</a></td></tr><tr><td valign="top"><a href="#repost_post-2">repost_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#repost-a-post">Repost a Post</a></td></tr><tr><td valign="top"><a href="#retrieve_global_stream-1">retrieve_global_stream/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-the-global-stream">Retrieve the Global stream</a></td></tr><tr><td valign="top"><a href="#retrieve_mentions-3">retrieve_mentions/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-mentioning-a-user">Retrieve Posts mentioning a User</a></td></tr><tr><td valign="top"><a href="#retrieve_personal_stream-2">retrieve_personal_stream/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-a-users-personalized-stream">Retrieve a User's personalized stream</a></td></tr><tr><td valign="top"><a href="#retrieve_post-1">retrieve_post/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-a-post">Retrieve a Post</a></td></tr><tr><td valign="top"><a href="#retrieve_posts-2">retrieve_posts/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-created-by-a-user">Retrieve Posts created by a User</a></td></tr><tr><td valign="top"><a href="#retrieve_replies-3">retrieve_replies/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-the-replies-to-a-post">Retrieve the replies to a Post</a>.</td></tr><tr><td valign="top"><a href="#retrieve_starred-3">retrieve_starred/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-starred-by-a-user">Retrieve Posts starred by a User</a></td></tr><tr><td valign="top"><a href="#retrieve_tagged-2">retrieve_tagged/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-tagged-posts">Retrieve tagged Posts</a></td></tr><tr><td valign="top"><a href="#retrieve_user-2">retrieve_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#retrieve-a-user">Retrieve a User</a></td></tr><tr><td valign="top"><a href="#search_for_users-2">search_for_users/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#search-for-users">Search for Users</a></td></tr><tr><td valign="top"><a href="#star_post-2">star_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#star-a-post">Star a Post</a></td></tr><tr><td valign="top"><a href="#unfollow_user-2">unfollow_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#unfollow-a-user">Unfollow a User</a></td></tr><tr><td valign="top"><a href="#unmute_user-2">unmute_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#unmute-a-user">Unmute a User</a></td></tr><tr><td valign="top"><a href="#unrepost_post-2">unrepost_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#unrepost-a-post">Unrepost a Post</a></td></tr><tr><td valign="top"><a href="#unstar_post-2">unstar_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#unstar-a-post">Unstar a Post</a></td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#access_token-4">access_token/4</a></td><td>Retrieve an access token.</td></tr><tr><td valign="top"><a href="#authenticate_url-2">authenticate_url/2</a></td><td>Generate an authentication URL with default scope.</td></tr><tr><td valign="top"><a href="#authenticate_url-3">authenticate_url/3</a></td><td>Generate an authentication URL.</td></tr><tr><td valign="top"><a href="#check_current_token-1">check_current_token/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/token.md#retrieve-current-token">Check current Token</a></td></tr><tr><td valign="top"><a href="#create_complex_post-2">create_complex_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post">Create a complex Post</a></td></tr><tr><td valign="top"><a href="#create_filter-2">create_filter/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#create-a-filter">Create a Filter</a></td></tr><tr><td valign="top"><a href="#create_post-2">create_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post">Create a Post</a></td></tr><tr><td valign="top"><a href="#create_reply-3">create_reply/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post">Create a Reply</a></td></tr><tr><td valign="top"><a href="#delete_filter-2">delete_filter/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#delete-a-filter">Delete a Filter</a></td></tr><tr><td valign="top"><a href="#delete_filters-1">delete_filters/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#delete-all-of-the-current-users-filters">Delete all of the current user's Filters</a></td></tr><tr><td valign="top"><a href="#delete_post-2">delete_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#delete-a-post">Delete a Post</a></td></tr><tr><td valign="top"><a href="#follow_user-2">follow_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#follow-a-user">Follow a User</a></td></tr><tr><td valign="top"><a href="#list_followers-2">list_followers/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-users-following-a-user">List users following a User</a></td></tr><tr><td valign="top"><a href="#list_following-2">list_following/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-users-a-user-is-following">List users a User is following</a></td></tr><tr><td valign="top"><a href="#list_muted-1">list_muted/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-muted-users">List muted Users</a></td></tr><tr><td valign="top"><a href="#list_reposters-2">list_reposters/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-users-who-have-reposted-a-post">List Users who have reposted a Post</a></td></tr><tr><td valign="top"><a href="#list_stars-2">list_stars/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#list-users-who-have-starred-a-post">List Users who have starred a Post</a></td></tr><tr><td valign="top"><a href="#mute_user-2">mute_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#mute-a-user">Mute a User</a></td></tr><tr><td valign="top"><a href="#repost_post-2">repost_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#repost-a-post">Repost a Post</a></td></tr><tr><td valign="top"><a href="#retrieve_filter-2">retrieve_filter/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#retrieve-a-filter">Retrieve a Filter</a></td></tr><tr><td valign="top"><a href="#retrieve_filters-1">retrieve_filters/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#get-current-users-filters">Get current user's Filters</a></td></tr><tr><td valign="top"><a href="#retrieve_global_stream-1">retrieve_global_stream/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-the-global-stream">Retrieve the Global stream</a></td></tr><tr><td valign="top"><a href="#retrieve_mentions-3">retrieve_mentions/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-mentioning-a-user">Retrieve Posts mentioning a User</a></td></tr><tr><td valign="top"><a href="#retrieve_personal_stream-2">retrieve_personal_stream/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-a-users-personalized-stream">Retrieve a User's personalized stream</a></td></tr><tr><td valign="top"><a href="#retrieve_post-1">retrieve_post/1</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-a-post">Retrieve a Post</a></td></tr><tr><td valign="top"><a href="#retrieve_posts-2">retrieve_posts/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-created-by-a-user">Retrieve Posts created by a User</a></td></tr><tr><td valign="top"><a href="#retrieve_replies-3">retrieve_replies/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-the-replies-to-a-post">Retrieve the replies to a Post</a>.</td></tr><tr><td valign="top"><a href="#retrieve_starred-3">retrieve_starred/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-starred-by-a-user">Retrieve Posts starred by a User</a></td></tr><tr><td valign="top"><a href="#retrieve_tagged-2">retrieve_tagged/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-tagged-posts">Retrieve tagged Posts</a></td></tr><tr><td valign="top"><a href="#retrieve_user-2">retrieve_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#retrieve-a-user">Retrieve a User</a></td></tr><tr><td valign="top"><a href="#search_for_users-2">search_for_users/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#search-for-users">Search for Users</a></td></tr><tr><td valign="top"><a href="#star_post-2">star_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#star-a-post">Star a Post</a></td></tr><tr><td valign="top"><a href="#unfollow_user-2">unfollow_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#unfollow-a-user">Unfollow a User</a></td></tr><tr><td valign="top"><a href="#unmute_user-2">unmute_user/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/users.md#unmute-a-user">Unmute a User</a></td></tr><tr><td valign="top"><a href="#unrepost_post-2">unrepost_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#unrepost-a-post">Unrepost a Post</a></td></tr><tr><td valign="top"><a href="#unstar_post-2">unstar_post/2</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#unstar-a-post">Unstar a Post</a></td></tr><tr><td valign="top"><a href="#update_filter-3">update_filter/3</a></td><td><a href="https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#update-a-filter">Update a Filter</a></td></tr></table>
 
 
 <a name="functions"></a>
@@ -98,7 +98,16 @@ See [app.net authentication](https://github.com/appdotnet/api-spec/blob/master/a
 <br></br>
 
 
-[Create a complex Post](https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post)<a name="create_post-2"></a>
+[Create a complex Post](https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post)<a name="create_filter-2"></a>
+
+###create_filter/2##
+
+
+<pre>create_filter(AccessToken::string(), Filter::<a href="#type-json_term">json_term()</a>) -> <a href="#type-http_response">http_response()</a></pre>
+<br></br>
+
+
+[Create a Filter](https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#create-a-filter)<a name="create_post-2"></a>
 
 ###create_post/2##
 
@@ -116,7 +125,25 @@ See [app.net authentication](https://github.com/appdotnet/api-spec/blob/master/a
 <br></br>
 
 
-[Create a Reply](https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post)<a name="delete_post-2"></a>
+[Create a Reply](https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post)<a name="delete_filter-2"></a>
+
+###delete_filter/2##
+
+
+<pre>delete_filter(AccessToken::string(), FilterId::string()) -> <a href="#type-http_response">http_response()</a></pre>
+<br></br>
+
+
+[Delete a Filter](https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#delete-a-filter)<a name="delete_filters-1"></a>
+
+###delete_filters/1##
+
+
+<pre>delete_filters(AccessToken::string()) -> <a href="#type-http_response">http_response()</a></pre>
+<br></br>
+
+
+[Delete all of the current user's Filters](https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#delete-all-of-the-current-users-filters)<a name="delete_post-2"></a>
 
 ###delete_post/2##
 
@@ -197,7 +224,25 @@ See [app.net authentication](https://github.com/appdotnet/api-spec/blob/master/a
 <br></br>
 
 
-[Repost a Post](https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#repost-a-post)<a name="retrieve_global_stream-1"></a>
+[Repost a Post](https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#repost-a-post)<a name="retrieve_filter-2"></a>
+
+###retrieve_filter/2##
+
+
+<pre>retrieve_filter(AccessToken::string(), FilterId::string()) -> <a href="#type-http_response">http_response()</a></pre>
+<br></br>
+
+
+[Retrieve a Filter](https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#retrieve-a-filter)<a name="retrieve_filters-1"></a>
+
+###retrieve_filters/1##
+
+
+<pre>retrieve_filters(AccessToken::string()) -> <a href="#type-http_response">http_response()</a></pre>
+<br></br>
+
+
+[Get current user's Filters](https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#get-current-users-filters)<a name="retrieve_global_stream-1"></a>
 
 ###retrieve_global_stream/1##
 
@@ -332,4 +377,13 @@ See [app.net authentication](https://github.com/appdotnet/api-spec/blob/master/a
 <br></br>
 
 
-[Unstar a Post](https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#unstar-a-post)
+[Unstar a Post](https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#unstar-a-post)<a name="update_filter-3"></a>
+
+###update_filter/3##
+
+
+<pre>update_filter(AccessToken::string(), FilterId::string(), Filter::<a href="#type-json_term">json_term()</a>) -> <a href="#type-http_response">http_response()</a></pre>
+<br></br>
+
+
+[Update a Filter](https://github.com/appdotnet/api-spec/blob/master/resources/filters.md#update-a-filter)

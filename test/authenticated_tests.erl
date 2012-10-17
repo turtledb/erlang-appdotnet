@@ -32,12 +32,18 @@ teardown({Pid, _AccessToken}) ->
     appdotnet_client:stop(Pid).
 
 retrieve_user_test({Pid, AccessToken}) ->
-    {ok, User, _Meta} = appdotnet_client:q(Pid, retrieve_user, [AccessToken, "@erikh"]),
+    {ok, User, Meta} = appdotnet_client:q(Pid, retrieve_user, [AccessToken, "@erikh"]),
+    check_meta(Meta),
     Id = proplists:get_value(<<"id">>, User),
     ?assertEqual(<<"19697">>, Id).
 
 list_followers_test({Pid, AccessToken}) ->
-    {ok, _Data, _Meta} = appdotnet_client:q(Pid, list_followers, [AccessToken, "@erikh"]).
+    {ok, _Data, Meta} = appdotnet_client:q(Pid, list_followers, [AccessToken, "@erikh"]),
+    check_meta(Meta).
 
 check_current_token_test({Pid, AccessToken}) ->
-    {ok, _Data, _Meta} = appdotnet_client:q(Pid, check_current_token, [AccessToken]).
+    {ok, _Data, Meta} = appdotnet_client:q(Pid, check_current_token, [AccessToken]),
+    check_meta(Meta).
+
+check_meta(Meta) ->
+    ?assertEqual(proplists:get_value(<<"code">>, Meta),200).

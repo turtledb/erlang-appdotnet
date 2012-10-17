@@ -37,13 +37,20 @@ authenticate_url_test(Pid) ->
     ?assertEqual("https://alpha.app.net/oauth/authenticate?client_id=TEST&response_type=code&redirect_uri=http%3a%2f%2flocalhost&scope=stream%2cemail",URL).
 
 retrieve_post_test(Pid) ->
-    {ok, _Post, _Meta} = appdotnet_client:q(Pid, retrieve_post, ["588214"]).
+    {ok, _Post, Meta} = appdotnet_client:q(Pid, retrieve_post, ["588214"]),
+    check_meta(Meta).
 
 retrieve_posts_test(Pid) ->
-    {ok, _Posts, _Meta} = appdotnet_client:q(Pid, retrieve_posts, ["19697",[]]).
+    {ok, _Posts, Meta} = appdotnet_client:q(Pid, retrieve_posts, ["19697",[]]),
+    check_meta(Meta).
 
 global_stream_test(Pid) ->
-    {ok, _Posts, _Meta} = appdotnet_client:q(Pid, retrieve_global_stream, [[]]).
+    {ok, _Posts, Meta} = appdotnet_client:q(Pid, retrieve_global_stream, [[]]),
+    check_meta(Meta).
 
 list_tagged_test(Pid) ->
-    {ok, _Posts, _Meta} = appdotnet_client:q(Pid, retrieve_tagged, ["erlang",[{"count",1}]]).
+    {ok, _Posts, Meta} = appdotnet_client:q(Pid, retrieve_tagged, ["erlang",[{"count",1}]]),
+    check_meta(Meta).
+
+check_meta(Meta) ->
+    ?assertEqual(proplists:get_value(<<"code">>, Meta),200).
