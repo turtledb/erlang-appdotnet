@@ -66,7 +66,7 @@ __Authors:__ Erik Hedenstr&ouml;m ([`erik@hedenstroem.com`](mailto:erik@hedenstr
 ###q/3##
 
 
-<pre>q(Pid::pid(), Function::atom(), Args::list()) -&gt; {ok, term()} | {error, term()}</pre>
+<pre>q(Pid::pid(), Function::atom(), Args::list()) -> {ok, URL::string()} | <a href="appdotnet.md#type-http_response">appdotnet:http_response()</a></pre>
 <br></br>
 
 

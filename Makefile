@@ -37,7 +37,7 @@ test-authenticated: compile
 # Dialyzer.
 
 build-plt:
-	@$(DIALYZER) --build_plt --output_plt .$(APP).plt --apps kernel stdlib sasl inets crypto public_key ssl deps/*
+	@$(DIALYZER) --build_plt --output_plt .$(APP).plt --apps kernel stdlib sasl inets crypto public_key ssl eunit deps/*
 
 dialyze:
 	@$(DIALYZER) src test --src --no_check_plt --plt .$(APP).plt --no_native -Werror_handling -Wunmatched_returns

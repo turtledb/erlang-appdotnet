@@ -1,8 +1,6 @@
 %% @author Erik Hedenstr&ouml;m <erik@hedenstroem.com>
 %% @doc Erlang implementation of the App.net <a href="https://github.com/appdotnet/api-spec">API Specification</a>
 
-%% @todo Implement <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#general-parameters">general parameters</a> for posts.
-
 -module(appdotnet).
 
 %%
@@ -22,12 +20,23 @@
 
 -export([create_post/2,create_reply/3,create_complex_post/2]).
 -export([retrieve_post/1,delete_post/2]).
--export([retrieve_replies/2,retrieve_posts/1]).
+-export([retrieve_replies/3,retrieve_posts/2]).
 -export([repost_post/2,unrepost_post/2,star_post/2,unstar_post/2]).
--export([list_starred/2,list_mentions/2,list_tagged/1]).
--export([personal_stream/1,global_stream/0]).
+-export([retrieve_starred/3,retrieve_mentions/3,retrieve_tagged/2]).
+-export([retrieve_personal_stream/2,retrieve_global_stream/1]).
 
--type http_response() :: {ok, Data :: jsx:json_term(), Meta :: jsx:json_term()} | {error, Reason :: term()}.
+-export_type([http_response/0]).
+
+-type json_term() :: list({binary(), json_term()})
+    | list(json_term())
+    | true
+    | false
+    | null
+    | integer()
+    | float()
+    | binary().
+-type http_response() :: {ok, Data :: json_term(), Meta :: json_term()} | {error, Reason :: term()}.
+-type general_parameters() :: [{string(),string() | non_neg_integer()}].
 
 %%
 %% API Functions
@@ -169,7 +178,7 @@ create_reply(AccessToken, Text, ReplyTo) ->
     send_req("https://alpha-api.app.net/"++Path, Headers, post, url_encode(Params)).
 
 %% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#create-a-post">Create a complex Post</a>
--spec create_complex_post(AccessToken :: string(), Post :: jsx:json_term()) -> http_response().
+-spec create_complex_post(AccessToken :: string(), Post :: json_term()) -> http_response().
 create_complex_post(AccessToken, Post) ->
     Path = "/stream/0/posts",
     Headers = [{"Content-Type","application/json"},{"Authorization","Bearer "++AccessToken}],
@@ -185,15 +194,15 @@ retrieve_post(PostId) ->
 delete_post(AccessToken, PostId) ->
     get_resource(AccessToken, delete, "/stream/0/posts/"++PostId).
 
-%% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-the-replies-to-a-post">Retrieve the replies to a Post</a>
--spec retrieve_replies(AccessToken :: string(), PostId :: string()) -> http_response().
-retrieve_replies(AccessToken, PostId) ->
-    get_resource(AccessToken, get, "/stream/0/posts/"++PostId++"/replies").
+%% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-the-replies-to-a-post">Retrieve the replies to a Post</a>.
+-spec retrieve_replies(AccessToken :: string(), PostId :: string(), GeneralParameters :: general_parameters()) -> http_response().
+retrieve_replies(AccessToken, PostId, GeneralParameters) ->
+    get_resource(AccessToken, get, "/stream/0/posts/"++PostId++"/replies?"++url_encode(GeneralParameters)).
 
 %% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-created-by-a-user">Retrieve Posts created by a User</a>
--spec retrieve_posts(UserId :: string()) -> http_response().
-retrieve_posts(UserId) ->
-    get_resource(get, "/stream/0/users/"++UserId++"/posts").
+-spec retrieve_posts(UserId :: string(), GeneralParameters :: general_parameters()) -> http_response().
+retrieve_posts(UserId, GeneralParameters) ->
+    get_resource(get, "/stream/0/users/"++UserId++"/posts?"++url_encode(GeneralParameters)).
 
 %% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#repost-a-post">Repost a Post</a>
 -spec repost_post(AccessToken :: string(), PostId :: string()) -> http_response().
@@ -216,29 +225,29 @@ unstar_post(AccessToken, PostId) ->
     get_resource(AccessToken, delete, "/stream/0/posts/"++PostId++"/star").
 
 %% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-starred-by-a-user">Retrieve Posts starred by a User</a>
--spec list_starred(AccessToken :: string(), UserId :: string()) -> http_response().
-list_starred(AccessToken, UserId) ->
-    get_resource(AccessToken, get, "/stream/0/users/"++UserId++"/stars").
+-spec retrieve_starred(AccessToken :: string(), UserId :: string(), GeneralParameters :: general_parameters()) -> http_response().
+retrieve_starred(AccessToken, UserId, GeneralParameters) ->
+    get_resource(AccessToken, get, "/stream/0/users/"++UserId++"/stars?"++url_encode(GeneralParameters)).
 
 %% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-posts-mentioning-a-user">Retrieve Posts mentioning a User</a>
--spec list_mentions(AccessToken :: string(), UserId :: string()) -> http_response().
-list_mentions(AccessToken, UserId) ->
-    get_resource(AccessToken, get, "/stream/0/users/"++UserId++"/mentions").
+-spec retrieve_mentions(AccessToken :: string(), UserId :: string(), GeneralParameters :: general_parameters()) -> http_response().
+retrieve_mentions(AccessToken, UserId, GeneralParameters) ->
+    get_resource(AccessToken, get, "/stream/0/users/"++UserId++"/mentions?"++url_encode(GeneralParameters)).
 
 %% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-a-users-personalized-stream">Retrieve a User's personalized stream</a>
--spec personal_stream(AccessToken :: string()) -> http_response().
-personal_stream(AccessToken) ->
-    get_resource(AccessToken, get, "/stream/0/posts/stream").
+-spec retrieve_personal_stream(AccessToken :: string(), GeneralParameters :: general_parameters()) -> http_response().
+retrieve_personal_stream(AccessToken, GeneralParameters) ->
+    get_resource(AccessToken, get, "/stream/0/posts/stream?"++url_encode(GeneralParameters)).
 
 %% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-the-global-stream">Retrieve the Global stream</a>
--spec global_stream() -> http_response().
-global_stream() ->
-    get_resource(get, "/stream/0/posts/stream/global").
+-spec retrieve_global_stream(GeneralParameters :: general_parameters()) -> http_response().
+retrieve_global_stream(GeneralParameters) ->
+    get_resource(get, "/stream/0/posts/stream/global?"++url_encode(GeneralParameters)).
 
 %% @doc <a href="https://github.com/appdotnet/api-spec/blob/master/resources/posts.md#retrieve-tagged-posts">Retrieve tagged Posts</a>
--spec list_tagged(Hashtag :: string()) -> http_response().
-list_tagged(Hashtag) ->
-    get_resource(get, "/stream/0/posts/tag/"++Hashtag).
+-spec retrieve_tagged(Hashtag :: string(), GeneralParameters :: general_parameters()) -> http_response().
+retrieve_tagged(Hashtag, GeneralParameters) ->
+    get_resource(get, "/stream/0/posts/tag/"++Hashtag++"?"++url_encode(GeneralParameters)).
 
 %%
 %% Local Functions
@@ -247,9 +256,15 @@ list_tagged(Hashtag) ->
 url_encode(Params) ->
     url_encode(Params,"").
 
--spec url_encode(Params :: [{Key :: string(), Value :: string()}],Acc :: string()) -> string().
+-spec url_encode(Params :: [{Key :: string(), Value :: string() | integer()}],Acc :: string()) -> string().
+url_encode([],[]) ->
+    [];
+
 url_encode([],[_|Acc]) ->
     Acc;
+
+url_encode([{Key,Value}|Params],Acc) when is_number(Value) ->
+    url_encode([{Key,erlang:integer_to_list(Value)}|Params],Acc);
 
 url_encode([{Key,Value}|Params],Acc) ->
     url_encode(Params, Acc ++ "&" ++ ibrowse_lib:url_encode(Key) ++ "=" ++ ibrowse_lib:url_encode(Value)).

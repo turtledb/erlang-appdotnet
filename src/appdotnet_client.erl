@@ -36,7 +36,7 @@ stop(Pid) ->
 start_link(Args) ->
     gen_server:start_link(?MODULE, Args, []).
 
--spec q(Pid :: pid(), Function :: atom(), Args :: list()) -> {ok, term()} | {error, term()}.
+-spec q(Pid :: pid(), Function :: atom(), Args :: list()) ->  {ok, URL :: string()} | appdotnet:http_response().
 q(Pid, Function, Args) ->
     gen_server:call(Pid, {apply, Function, Args}, ?CALL_TIMEOUT).
 
